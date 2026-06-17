@@ -21,27 +21,41 @@ export function ContactForm({ variant = 'light', accent = 'gold' }: ContactFormP
   const radius = isRed ? 'rounded-xl' : 'rounded-sm'
   const focusBorder = isRed ? 'focus:border-red' : 'focus:border-gold'
 
+  const inputClass = isDark
+    ? isRed
+      ? `w-full ${radius} border border-white/15 bg-white/5 px-3.5 py-3 text-sm text-white outline-none transition ${focusBorder}`
+      : `w-full ${radius} border border-white/15 bg-white/5 px-3.5 py-3 text-sm text-white outline-none transition ${focusBorder}`
+    : `w-full ${radius} border border-black/10 bg-white px-3.5 py-3 text-sm text-charcoal outline-none transition ${focusBorder}`
+
   const labelClass = isDark
-    ? 'text-[10px] uppercase tracking-[0.1em] text-white/50'
+    ? isRed
+      ? 'font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-white/60'
+      : 'text-[10px] uppercase tracking-[0.1em] text-white/50'
     : isRed
       ? 'font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/60'
       : 'text-[10px] uppercase tracking-[0.1em] text-stone'
 
-  const inputClass = isDark
-    ? `w-full ${radius} border border-white/15 bg-white/5 px-3.5 py-3 text-sm text-white outline-none transition ${focusBorder}`
-    : `w-full ${radius} border border-black/10 bg-white px-3.5 py-3 text-sm text-charcoal outline-none transition ${focusBorder}`
-
   const boxClass = isDark
-    ? 'rounded-sm bg-white/5 p-8 backdrop-blur-sm'
+    ? isRed
+      ? 'rounded-2xl bg-[#222] p-8 shadow-lg border border-white/10'
+      : 'rounded-sm bg-white/5 p-8 backdrop-blur-sm'
     : isRed
-      ? 'rounded-2xl bg-white p-8 shadow-lg'
+      ? 'rounded-2xl bg-white p-8 shadow-lg dark:bg-[#222] dark:border dark:border-white/10'
       : 'rounded-sm bg-offwhite p-8'
 
-  const headingClass = isDark ? 'text-white' : isRed ? 'text-ink-dark font-poppins' : 'text-navy'
+  const headingClass = isDark
+    ? isRed
+      ? 'text-white font-poppins'
+      : 'text-white'
+    : isRed
+      ? 'text-ink-dark font-poppins'
+      : 'text-navy'
 
   const submitRadius = isRed ? 'rounded-full' : 'rounded-sm'
   const submitIdle = isRed
-    ? 'bg-black text-white hover:bg-red'
+    ? isDark
+      ? 'bg-red text-white hover:bg-pink'
+      : 'bg-black text-white hover:bg-red'
     : 'bg-gold text-navy-dark hover:opacity-90'
   const submitDone = isRed ? 'bg-red text-white' : 'bg-navy text-gold'
 

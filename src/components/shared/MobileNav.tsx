@@ -12,6 +12,7 @@ type MobileNavProps = {
   ctaClassName: string
   linkClassName: string
   menuButtonClassName: string
+  panelClassName?: string
 }
 
 export function MobileNav({
@@ -21,6 +22,7 @@ export function MobileNav({
   ctaClassName,
   linkClassName,
   menuButtonClassName,
+  panelClassName = 'bg-inherit',
 }: MobileNavProps) {
   const [open, setOpen] = useState(false)
 
@@ -37,7 +39,7 @@ export function MobileNav({
       </button>
 
       {open && (
-        <div className="absolute inset-x-0 top-16 border-t border-white/10 bg-inherit px-6 py-4 shadow-lg">
+        <div className={`absolute inset-x-0 top-16 border-t border-white/10 px-6 py-4 shadow-lg ${panelClassName}`}>
           <ul className="space-y-3">
             {links.map((link) => (
               <li key={link.href}>
