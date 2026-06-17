@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-lato: "Lato", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+
+  /* Site 1 (rareacreinvestment.com) palette */
+  --color-ink: #404040;
+  --color-ink-dark: #191919;
+  --color-cloud: #f5f5f5;
+  --color-red: #cf0e15;
+  --color-pink: #fb2056;
+  --color-brick: #c33622;
+
+  /* Site 2 (elite navy/gold) palette */
+  --color-navy: #1b3a5c;
+  --color-navy-dark: #0f2438;
+  --color-navy-elite: #0a1128;
+  --color-gold: #c8a96e;
+  --color-gold-light: #e8d5a8;
+  --color-gold-pale: #f7f0e3;
+  --color-gold-luxury: #d4af37;
+  --color-charcoal: #1a1a16;
+  --color-offwhite: #f5f5f3;
+  --color-stone: #8a8a84;
+  --color-stone-dark: #4a4a44;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 35%, transparent);
+}

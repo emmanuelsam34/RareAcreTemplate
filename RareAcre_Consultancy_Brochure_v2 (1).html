@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RareAcre, Consultation & Advisory Services</title>
+<style>
+:root {
+  --navy:      #1B3A5C;
+  --navy-d:    #0F2438;
+  --gold:      #C8A96E;
+  --gold-lt:   #E8D5A8;
+  --gold-pale: #F7F0E3;
+  --white:     #FFFFFF;
+  --g100:      #F5F5F3;
+  --g300:      #D8D8D2;
+  --g500:      #8A8A84;
+  --g700:      #4A4A44;
+  --text:      #1A1A16;
+  --fd: 'Georgia','Times New Roman',serif;
+  --fb: 'Arial','Helvetica Neue',sans-serif;
+  --max: 1080px;
+  --pad: clamp(20px,5vw,72px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;background:rgba(15,36,56,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,.18);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad)}
+.n-logo{font-weight:700;font-size:17px;letter-spacing:.12em;color:#fff}.n-logo span{color:var(--gold)}
+.n-links{display:flex;gap:26px;list-style:none}
+.n-links a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:color .2s}
+.n-links a:hover{color:var(--gold)}
+.n-cta{background:var(--gold);color:var(--navy-d);padding:9px 22px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:opacity .2s;white-space:nowrap}
+.n-cta:hover{opacity:.87}
+@media(max-width:780px){.n-links{display:none}}
+
+/* WRAP / SECTION */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.sec{padding:88px 0}
+.sec--dark{background:var(--navy-d);color:#fff}
+.sec--navy{background:var(--navy);color:#fff}
+.sec--g{background:var(--g100)}
+.sec--gold{background:var(--gold-pale)}
+
+/* LABELS & HEADINGS */
+.eyebrow{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.s-title{font-family:var(--fd);font-size:clamp(26px,4vw,42px);font-weight:400;line-height:1.18;margin-bottom:14px}
+.s-sub{font-size:15px;color:var(--g700);max-width:580px;line-height:1.7}
+.s-sub--w{color:rgba(255,255,255,.7)}
+.s-head{margin-bottom:52px}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.fi.on{opacity:1;transform:none}
+
+/* ── HERO ── */
+#hero{min-height:100vh;background:linear-gradient(155deg,var(--navy-d) 0%,#16324e 52%,#0c1d2d 100%);display:flex;flex-direction:column;justify-content:center;padding:110px var(--pad) 72px;position:relative;overflow:hidden}
+.hero-inner{max-width:var(--max);margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.h-eye{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.h-eye::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.h-title{font-family:var(--fd);font-size:clamp(32px,4.5vw,54px);line-height:1.1;color:#fff;margin-bottom:22px;font-weight:400}
+.h-title em{font-style:italic;color:var(--gold-lt)}
+.h-sub{font-size:15px;color:rgba(255,255,255,.7);line-height:1.72;margin-bottom:36px;max-width:460px}
+.h-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-g{background:var(--gold);color:var(--navy-d);padding:13px 30px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:opacity .2s;display:inline-block}
+.btn-g:hover{opacity:.87}
+.btn-o{border:1px solid rgba(200,169,110,.45);color:var(--gold-lt);padding:13px 30px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:border-color .2s,color .2s;display:inline-block}
+.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.hero-bg{position:absolute;bottom:-50px;right:-30px;font-family:var(--fd);font-size:260px;color:rgba(255,255,255,.018);line-height:1;pointer-events:none;user-select:none;letter-spacing:-.04em}
+
+/* Stats grid in hero */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.16);padding:26px 22px;border-radius:2px}
+.stat-val{font-family:var(--fd);font-size:30px;color:var(--gold);font-weight:400;line-height:1;margin-bottom:6px}
+.stat-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* ── PROOF BANNER ── */
+.proof-bar{background:var(--gold);padding:18px var(--pad);display:flex;justify-content:center;gap:clamp(24px,4vw,72px);flex-wrap:wrap}
+.pb-item{text-align:center}
+.pb-val{font-family:var(--fd);font-size:22px;color:var(--navy-d);font-weight:400}
+.pb-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);opacity:.75;margin-top:2px}
+
+/* ── PROBLEMS ── */
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:var(--g300);border:1px solid var(--g300)}
+.prob-card{background:var(--white);padding:36px 28px;transition:background .2s}
+.prob-card:hover{background:var(--gold-pale)}
+.prob-n{font-family:var(--fd);font-size:44px;color:var(--gold-lt);font-weight:400;line-height:1;margin-bottom:14px}
+.prob-t{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;letter-spacing:.02em}
+.prob-b{font-size:13px;color:var(--g700);line-height:1.65}
+
+/* ── SERVICE CARDS ── */
+.svc-intro{background:var(--navy);padding:22px 28px;border-radius:2px;margin-bottom:40px}
+.svc-intro p{font-size:14px;color:rgba(255,255,255,.88);font-style:italic}
+.svc-intro strong{color:var(--gold)}
+
+/* Package cards */
+.pkg-section{margin-bottom:64px}
+.pkg-section-title{font-family:var(--fd);font-size:24px;font-weight:400;color:var(--navy);margin-bottom:6px}
+.pkg-section-sub{font-size:13px;color:var(--g700);margin-bottom:28px;max-width:600px;line-height:1.65}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+
+.pkg{border:1px solid var(--g300);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.pkg:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(27,58,92,.1)}
+.pkg.best{border-color:var(--gold)}
+.pkg-hd{background:var(--navy);color:#fff;padding:24px 24px 20px}
+.pkg.best .pkg-hd{background:var(--gold);color:var(--navy-d)}
+.pkg-badge{font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-bottom:8px}
+.pkg-name{font-family:var(--fd);font-size:19px;font-weight:400;margin-bottom:2px}
+.pkg-fee{font-size:26px;font-weight:700;margin-top:12px;letter-spacing:-.02em}
+.pkg.best .pkg-fee{color:var(--navy-d)}
+.pkg-bd{padding:22px;flex:1;display:flex;flex-direction:column}
+.pkg-section-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g500);margin:14px 0 8px}
+.pkg-section-label:first-child{margin-top:0}
+.pkg-list{list-style:none}
+.pkg-list li{font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--g100);display:flex;gap:8px;align-items:flex-start;color:var(--g700)}
+.pkg-list li:last-child{border-bottom:none}
+.pkg-list li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
+.pkg-del li::before{content:'→';color:var(--navy)}
+.pkg-cta{display:block;margin-top:auto;padding-top:16px}
+.pkg-btn{display:block;text-align:center;background:var(--navy);color:#fff;padding:11px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:opacity .2s}
+.pkg.best .pkg-btn{background:var(--gold);color:var(--navy-d)}
+.pkg-btn:hover{opacity:.84}
+
+/* standalone advisory packages (Feasibility + Planning) */
+.adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.adv-card{border:1px solid var(--g300);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.adv-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(27,58,92,.1)}
+.adv-hd{background:var(--navy-d);color:#fff;padding:28px 28px 22px}
+.adv-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.9;margin-bottom:10px}
+.adv-name{font-family:var(--fd);font-size:22px;font-weight:400;margin-bottom:6px}
+.adv-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:14px}
+.adv-fee{font-size:30px;font-weight:700;color:var(--gold);letter-spacing:-.02em}
+.adv-bd{padding:24px;flex:1;display:flex;flex-direction:column;gap:16px}
+.adv-col h5{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g500);margin-bottom:10px}
+.adv-list{list-style:none}
+.adv-list li{font-size:13px;padding:7px 0;border-bottom:1px solid var(--g100);display:flex;gap:8px;align-items:flex-start;color:var(--g700)}
+.adv-list li:last-child{border-bottom:none}
+.adv-list.inc li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.adv-list.del li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0}
+.adv-btn{display:block;text-align:center;background:var(--gold);color:var(--navy-d);padding:12px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:opacity .2s;margin-top:auto}
+.adv-btn:hover{opacity:.85}
+@media(max-width:680px){.adv-grid{grid-template-columns:1fr}}
+
+/* ── PROCESS ── */
+.proc-wrap{display:flex;flex-direction:column}
+.proc-step{display:grid;grid-template-columns:64px 1fr;gap:22px;align-items:start;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.proc-step:last-child{border-bottom:none}
+.proc-n{width:48px;height:48px;border-radius:50%;border:1px solid rgba(200,169,110,.38);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:19px;color:var(--gold);flex-shrink:0}
+.proc-h{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;letter-spacing:.02em}
+.proc-p{font-size:12.5px;color:rgba(255,255,255,.58);line-height:1.58}
+
+/* ── WHY ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.why-facts{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.why-fact{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 2px 2px 0}
+.wf-h{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.wf-p{font-size:12px;color:rgba(255,255,255,.58);line-height:1.55}
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cred{background:rgba(255,255,255,.06);border:1px solid rgba(200,169,110,.18);padding:22px;border-radius:2px;text-align:center}
+.cred .v{font-family:var(--fd);font-size:24px;color:var(--gold);font-weight:400}
+.cred .l{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.08em;margin-top:4px}
+@media(max-width:780px){.why-grid{grid-template-columns:1fr}}
+
+/* ── REVIEWS ── */
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.rev-card{background:var(--white);border:1px solid var(--g300);padding:32px;border-radius:2px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s,box-shadow .2s}
+.rev-card:hover{border-color:var(--gold);box-shadow:0 6px 28px rgba(200,169,110,.1)}
+.rev-stars{color:var(--gold);font-size:16px;letter-spacing:2px}
+.rev-text{font-size:13.5px;color:var(--g700);line-height:1.7;font-style:italic}
+.rev-text::before{content:'"'}
+.rev-text::after{content:'"'}
+.rev-author{margin-top:auto;padding-top:14px;border-top:1px solid var(--g100)}
+.rev-name{font-size:13px;font-weight:700;color:var(--navy)}
+.rev-role{font-size:11px;color:var(--g500);margin-top:2px}
+.rev-service{display:inline-block;margin-top:6px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);padding:3px 8px;border-radius:2px}
+
+/* ── ENGAGE ── */
+.eng-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--gold-lt)}
+.eng-step{background:var(--white);padding:34px 26px;text-align:center}
+.eng-icon{width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:20px;color:var(--gold)}
+.eng-h{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.eng-p{font-size:12px;color:var(--g700);line-height:1.55}
+
+/* ── CTA ── */
+.cta-sec{background:linear-gradient(140deg,var(--navy-d) 0%,#1e4a70 100%);padding:96px var(--pad);text-align:center;position:relative;overflow:hidden}
+.cta-deco{position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,169,110,.05);top:-140px;right:-100px;pointer-events:none}
+.cta-deco2{position:absolute;width:360px;height:360px;border-radius:50%;border:1px solid rgba(200,169,110,.05);bottom:-100px;left:-80px;pointer-events:none}
+.cta-sec h2{font-family:var(--fd);font-size:clamp(26px,4vw,44px);color:#fff;font-weight:400;margin-bottom:14px;line-height:1.2;position:relative;z-index:1}
+.cta-sec h2 em{font-style:italic;color:var(--gold-lt)}
+.cta-sec p{font-size:15px;color:rgba(255,255,255,.65);max-width:500px;margin:0 auto 36px;position:relative;z-index:1}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cta-g{background:var(--gold);color:var(--navy-d);padding:15px 38px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:opacity .2s;display:inline-block}
+.cta-g:hover{opacity:.87}
+.cta-gh{border:1px solid rgba(200,169,110,.38);color:var(--gold-lt);padding:15px 38px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:border-color .2s;display:inline-block}
+.cta-gh:hover{border-color:var(--gold)}
+
+/* ── CONTACT ── */
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.con-info h3{font-family:var(--fd);font-size:28px;color:var(--navy);font-weight:400;margin-bottom:16px}
+.con-info p{font-size:14px;color:var(--g700);line-height:1.7;margin-bottom:24px}
+.con-links{display:flex;flex-direction:column;gap:12px}
+.con-link{display:flex;gap:12px;align-items:center;padding:13px 15px;border:1px solid var(--g300);border-radius:2px;transition:border-color .2s,background .2s}
+.con-link:hover{border-color:var(--gold);background:var(--gold-pale)}
+.con-ico{width:34px;height:34px;background:var(--navy);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;flex-shrink:0}
+.con-lt strong{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:2px}
+.con-lt span{font-size:12.5px;color:var(--g700)}
+.form-box{background:var(--g100);padding:36px;border-radius:2px}
+.form-box h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.form-box > p{font-size:12.5px;color:var(--g700);margin-bottom:20px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 13px;background:var(--white);border:1px solid var(--g300);border-radius:2px;font-family:var(--fb);font-size:13px;color:var(--text);outline:none;transition:border-color .2s;appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{resize:vertical;min-height:80px}
+.f-submit{width:100%;padding:13px;background:var(--gold);color:var(--navy-d);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:opacity .2s}
+.f-submit:hover{opacity:.87}
+.f-note{font-size:10.5px;color:var(--g500);margin-top:8px;text-align:center}
+@media(max-width:780px){.con-grid{grid-template-columns:1fr}}
+
+/* ── DIGITAL RECS ── */
+.drec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px;margin-top:48px}
+.drec{background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.14);padding:18px;border-radius:2px}
+.drec h5{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:5px;letter-spacing:.04em}
+.drec p{font-size:11px;color:rgba(255,255,255,.55);line-height:1.55}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-d);padding:36px var(--pad) 20px;border-top:1px solid rgba(200,169,110,.1)}
+.foot-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.f-logo{font-size:15px;font-weight:700;letter-spacing:.1em;color:#fff}.f-logo span{color:var(--gold)}
+.f-copy{font-size:11px;color:rgba(255,255,255,.3)}
+.f-links{display:flex;gap:20px}.f-links a{font-size:11px;color:rgba(255,255,255,.45)}.f-links a:hover{color:var(--gold)}
+
+/* WA float */
+.wa{position:fixed;bottom:26px;right:26px;z-index:300;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.38);font-size:24px;transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+
+/* RESPONSIVE */
+@media(max-width:780px){.hero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr}.cta-btns{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="n-logo">RARE<span>A</span>CRE</div>
+  <ul class="n-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="n-cta">Book a Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="fi">
+      <p class="h-eye">Consultation &amp; Advisory Services</p>
+      <h1 class="h-title">
+        Seek Professional Guidance<br>Before You <em>Invest</em><br>a Single Naira.
+      </h1>
+      <p class="h-sub">
+        RareAcre delivers structured, expert-led real estate consultation, from land verification and acquisition advisory through development feasibility and project planning. Protecting your capital starts here.
+      </p>
+      <div class="h-btns">
+        <a href="#pricing" class="btn-g">View Consultation Packages</a>
+        <a href="#contact" class="btn-o">Book a Strategy Session</a>
+      </div>
+    </div>
+    <div class="stats-grid fi">
+      <div class="stat-card">
+        <div class="stat-val">₦2b+</div>
+        <div class="stat-lbl">Transactions Overseen</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">63+</div>
+        <div class="stat-lbl">Clients Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">28+</div>
+        <div class="stat-lbl">Active Advisory Mandates</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">Written Deliverables on Every Engagement</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bg">RA</div>
+</section>
+
+<div class="pb-lbl">Transactions Overseen</div></div>
+  <div class="pb-item"><div class="pb-val">63+</div><div class="pb-lbl">Clients Served</div></div>
+  <div class="pb-item"><div class="pb-val">28+</div><div class="pb-lbl">Active Advisory Mandates</div></div>
+  <div class="pb-item"><div class="pb-val">4</div><div class="pb-lbl">Consultation Tiers</div></div>
+  <div class="pb-item"><div class="pb-val">Lekki</div><div class="pb-lbl">Phase 1, Lagos</div></div>
+</div>
+
+<!-- PROBLEMS -->
+<section class="sec" id="problems">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow">The Challenge</p>
+      <h2 class="s-title">The Problems We're Built to Solve</h2>
+      <p class="s-sub">Most costly real estate mistakes happen before a property is acquired, developed, or financed. Our consultancy services help clients make informed decisions and avoid expensive setbacks.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card fi">
+        <div class="prob-n">01</div>
+        <h3 class="prob-t">Acquiring the Wrong Property</h3>
+        <p class="prob-b">Title issues, ownership disputes, hidden liabilities, and poor investment decisions can lead to costly losses.</p>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">02</div>
+        <h3 class="prob-t">No Development Direction</h3>
+        <p class="prob-b">Many landowners sit on valuable assets without knowing what to build, what the market demands, or whether a project is financially viable. Clarity starts with a feasibility assessment.</p>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">03</div>
+        <h3 class="prob-t">Unstructured Projects</h3>
+        <p class="prob-b">Without a proper budget, roadmap, and delivery strategy, projects stall, costs overrun, and developers lose control of their investment before a block is laid.</p>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">04</div>
+        <h3 class="prob-t">Investing From Abroad Blind</h3>
+        <p class="prob-b">Diaspora investors face unique risks, remote decisions, unreliable agents, no verification, and zero accountability. Our diaspora advisory model is built for this challenge.</p>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">05</div>
+        <h3 class="prob-t">Hidden Legal Risks</h3>
+        <p class="prob-b">Litigation history, encumbrances, mortgage liens, and community disputes are invisible without proper due diligence. We surface every risk before you commit.</p>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">06</div>
+        <h3 class="prob-t">Acting Without Expert Advice</h3>
+        <p class="prob-b">Every major real estate decision, buying, building, developing, deserves structured professional guidance. We provide it in a documented, accountable format.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES & PRICING -->
+<section class="sec sec--g" id="services">
+  <div class="wrap" id="pricing">
+    <div class="s-head fi">
+      <p class="eyebrow">Consultation Services</p>
+      <h2 class="s-title">Our Advisory Services & Packages</h2>
+      <p class="s-sub">Every engagement is structured, documented, and delivered with written outputs. Four service areas. Clear scope. Transparent pricing.</p>
+    </div>
+
+    <!-- LAND VERIFICATION -->
+    <div class="pkg-section fi">
+      <h3 class="pkg-section-title">Land Verification & Acquisition Advisory</h3>
+      <p class="pkg-section-sub">Helping clients make informed land acquisition decisions through structured due diligence, risk assessment, and acquisition guidance.</p>
+      <div class="pkg-grid">
+
+        <!-- Basic -->
+        <div class="pkg">
+          <div class="pkg-hd">
+            <div class="pkg-badge">Package 01</div>
+            <div class="pkg-name">Basic Verification</div>
+            <div class="pkg-fee">₦350,000</div>
+          </div>
+          <div class="pkg-bd">
+            <div class="pkg-section-label">Includes</div>
+            <ul class="pkg-list">
+              <li>Title Document Review</li>
+              <li>Title Search &amp; Verification</li>
+              <li>Ownership &amp; Authenticity Checks</li>
+              <li>Survey Plan Verification</li>
+            </ul>
+            <div class="pkg-section-label">Deliverables</div>
+            <ul class="pkg-list pkg-del">
+              <li>Verification Summary Report</li>
+              <li>Preliminary Recommendation</li>
+            </ul>
+            <div class="pkg-cta"><a href="#contact" class="pkg-btn">Book This Package</a></div>
+          </div>
+        </div>
+
+        <!-- Standard -->
+        <div class="pkg best">
+          <div class="pkg-hd">
+            <div class="pkg-badge">Package 02 · Most Popular</div>
+            <div class="pkg-name">Standard Due Diligence</div>
+            <div class="pkg-fee">₦525,000</div>
+          </div>
+          <div class="pkg-bd">
+            <div class="pkg-section-label">Includes</div>
+            <ul class="pkg-list">
+              <li>Title Document Review</li>
+              <li>Title Search &amp; Verification</li>
+              <li>Ownership &amp; Authenticity Checks</li>
+              <li>Survey Plan Verification</li>
+              <li>Encumbrance Status Assessment</li>
+              <li>Litigation &amp; Legal Dispute Search</li>
+              <li>Mortgage &amp; Loan Verification</li>
+            </ul>
+            <div class="pkg-section-label">Deliverables</div>
+            <ul class="pkg-list pkg-del">
+              <li>Due Diligence Report</li>
+              <li>Risk Assessment</li>
+              <li>Acquisition Recommendation</li>
+            </ul>
+            <div class="pkg-cta"><a href="#contact" class="pkg-btn">Book This Package</a></div>
+          </div>
+        </div>
+
+        <!-- Premium -->
+        <div class="pkg">
+          <div class="pkg-hd">
+            <div class="pkg-badge">Package 03 · Comprehensive</div>
+            <div class="pkg-name">Premium Due Diligence</div>
+            <div class="pkg-fee">₦800,000</div>
+          </div>
+          <div class="pkg-bd">
+            <div class="pkg-section-label">Includes</div>
+            <ul class="pkg-list">
+              <li>Title Document Review</li>
+              <li>Title Search &amp; Verification</li>
+              <li>Ownership &amp; Authenticity Checks</li>
+              <li>Survey Plan Verification</li>
+              <li>Encumbrance Status Assessment</li>
+              <li>Litigation &amp; Legal Dispute Search</li>
+              <li>Mortgage &amp; Loan Verification</li>
+              <li>Development Potential Assessment</li>
+              <li>Local Authority &amp; Community Due Diligence</li>
+            </ul>
+            <div class="pkg-section-label">Deliverables</div>
+            <ul class="pkg-list pkg-del">
+              <li>Comprehensive Due Diligence Report</li>
+              <li>Risk Assessment</li>
+              <li>Development Advisory Note</li>
+              <li>Acquisition Recommendation</li>
+            </ul>
+            <div class="pkg-cta"><a href="#contact" class="pkg-btn">Book This Package</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DEVELOPMENT FEASIBILITY + PROJECT PLANNING -->
+    <div class="pkg-section fi">
+      <h3 class="pkg-section-title">Development & Project Advisory</h3>
+      <p class="pkg-section-sub">For landowners, investors, and aspiring developers who need structured expert guidance on what to build, whether it's viable, and how to plan for delivery.</p>
+      <div class="adv-grid">
+
+        <!-- Feasibility -->
+        <div class="adv-card">
+          <div class="adv-hd">
+            <div class="adv-tag">Advisory Package 04</div>
+            <div class="adv-name">Development Feasibility Assessment</div>
+            <p class="adv-desc">For landowners and investors seeking clarity on what to build and whether a proposed project is financially viable.</p>
+            <div class="adv-fee">₦1,200,000</div>
+          </div>
+          <div class="adv-bd">
+            <div class="adv-col">
+              <h5>Includes</h5>
+              <ul class="adv-list inc">
+                <li>Market Review</li>
+                <li>Financial Outlook</li>
+                <li>Highest &amp; Best Use Assessment</li>
+              </ul>
+            </div>
+            <div class="adv-col">
+              <h5>Deliverables</h5>
+              <ul class="adv-list del">
+                <li>Feasibility Assessment Report</li>
+                <li>Development Recommendation</li>
+                <li>Investment Outlook</li>
+              </ul>
+            </div>
+            <a href="#contact" class="adv-btn">Book This Advisory</a>
+          </div>
+        </div>
+
+        <!-- Project Planning -->
+        <div class="adv-card">
+          <div class="adv-hd">
+            <div class="adv-tag">Advisory Package 05</div>
+            <div class="adv-name">Project Planning & Structuring</div>
+            <p class="adv-desc">For clients who want to build but require expert guidance, planning, and execution strategy before commencing development.</p>
+            <div class="adv-fee">₦2,400,000</div>
+          </div>
+          <div class="adv-bd">
+            <div class="adv-col">
+              <h5>Includes</h5>
+              <ul class="adv-list inc">
+                <li>Preliminary Budget Development</li>
+                <li>Development Roadmap</li>
+                <li>Construction Strategy</li>
+                <li>Project Delivery Timeline</li>
+                <li>Development Advisory Sessions</li>
+              </ul>
+            </div>
+            <div class="adv-col">
+              <h5>Deliverables</h5>
+              <ul class="adv-list del">
+                <li>Project Planning Report</li>
+                <li>Development Roadmap</li>
+                <li>Budget Framework</li>
+                <li>Construction Strategy Document</li>
+              </ul>
+            </div>
+            <a href="#contact" class="adv-btn">Book This Advisory</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="sec" id="clients">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow">Client Segments</p>
+      <h2 class="s-title">Who We Serve</h2>
+      <p class="s-sub">Our consultations are designed for anyone making a real estate decision that requires expert guidance and documented outcomes.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px" class="fi">
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">🏠</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">Landowners</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Feasibility assessments and highest & best use analysis before committing to any development.</p>
+      </div>
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">📊</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">Real Estate Investors</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Due diligence, acquisition advisory, and risk assessment before committing capital.</p>
+      </div>
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">✈️</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">Diaspora Investors</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Trusted advisory, verified acquisition, and remote-ready consultation structured for Nigerians abroad.</p>
+      </div>
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">🏗️</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">First-Time Developers</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Project planning and structuring that removes the guesswork from your first development.</p>
+      </div>
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">💼</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">Professionals & Executives</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Structured advisory for high-income earners making their first or next property investment.</p>
+      </div>
+      <div style="border:1px solid var(--g300);padding:26px 22px;border-radius:2px;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--g300)'">
+        <div style="font-size:22px;margin-bottom:12px">👨‍👩‍👧</div>
+        <h4 style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">Families Building Homes</h4>
+        <p style="font-size:12px;color:var(--g700);line-height:1.6">Land verification and project planning to protect your family's most important investment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY RAREACRE -->
+<section class="sec sec--dark" id="why">
+  <div class="wrap">
+    <div class="why-grid fi">
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Why RareAcre</p>
+        <h2 class="s-title" style="color:#fff">Advisory Grounded in<br><span style="font-style:italic;color:var(--gold-lt)">Real Execution.</span></h2>
+        <p style="font-size:14px;color:rgba(255,255,255,.68);line-height:1.7;margin-bottom:6px">Most advisory firms advise from a desk. RareAcre is an active developer, bringing practical market intelligence and real-world experience to every engagement.</p>
+        <div class="why-facts">
+          <div class="why-fact">
+            <div class="wf-h">₦2b+ in Transactions Overseen</div>
+            <div class="wf-p">We have guided clients through acquisitions, developments, and advisory engagements totalling over ₦2 billion in real estate transactions.</div>
+          </div>
+          <div class="why-fact">
+            <div class="wf-h">63+ Clients Served</div>
+            <div class="wf-p">From first-time land buyers to institutional investors, our consultations have protected capital across every client segment.</div>
+          </div>
+          <div class="why-fact">
+            <div class="wf-h">Every Engagement is Documented</div>
+            <div class="wf-p">Written reports, risk assessments, and formal recommendations on every mandate. Nothing undocumented. Nothing verbal.</div>
+          </div>
+          <div class="why-fact">
+            <div class="wf-h">Diaspora-Structured</div>
+            <div class="wf-p">Remote-ready advisory with virtual sessions, documented reporting, and verified outcomes designed for clients investing from abroad.</div>
+          </div>
+          <div class="why-fact">
+            <div class="wf-h">Active Developer Intelligence</div>
+            <div class="wf-p">RareAcre operates Resida Apartments and manages active construction mandates, giving our advisors ground-level market insight.</div>
+          </div>
+          <div class="why-fact">
+            <div class="wf-h">Experienced Multi-Disciplinary Team</div>
+            <div class="wf-p">Our advisory team combines expertise in real estate development, project management, engineering, architecture, construction, investment analysis, and property acquisition, providing clients with well-rounded, practical advice.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:var(--gold);margin-bottom:20px">Track Record</p>
+        <div class="cred-grid">
+          <div class="cred"><div class="v">₦2b+</div><div class="l">Transactions Overseen</div></div>
+          <div class="cred"><div class="v">63+</div><div class="l">Clients Served</div></div>
+          <div class="cred"><div class="v">28+</div><div class="l">Active Advisory Mandates</div></div>
+          <div class="cred"><div class="v">100%</div><div class="l">Written Deliverables</div></div>
+          <div class="cred"><div class="v">2023</div><div class="l">Incorporated, Lekki</div></div>
+          <div class="cred"><div class="v">5</div><div class="l">Consultation Packages</div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY PROCESS -->
+<section class="sec sec--navy" id="process">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow" style="color:var(--gold)">Advisory Process</p>
+      <h2 class="s-title" style="color:#fff">How a Consultation Works</h2>
+      <p class="s-sub s-sub--w">A structured, documented process from first contact to final report. Designed to protect your interests at every step.</p>
+    </div>
+    <div class="proc-wrap fi">
+      <div class="proc-step">
+        <div class="proc-n">1</div>
+        <div><div class="proc-h">Enquiry & Intake</div><p class="proc-p">Submit your enquiry online, via WhatsApp, or by direct referral. We capture your property details, objectives, and timeline.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">2</div>
+        <div><div class="proc-h">Form Completion & Scope Definition</div><p class="proc-p">Complete the RareAcre Property Information Form. This enables our team to correctly scope and price your engagement upfront.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">3</div>
+        <div><div class="proc-h">Invoice & Payment</div><p class="proc-p">Receive a clear, itemised engagement invoice. Payment activates your mandate. All terms documented. No hidden fees.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">4</div>
+        <div><div class="proc-h">Appointment Confirmation</div><p class="proc-p">Receive your confirmed appointment details. Sessions conducted in-person at our Lekki Phase 1 office or virtually for diaspora clients.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">5</div>
+        <div><div class="proc-h">Advisory Sessions & Analysis</div><p class="proc-p">Structured advisory sessions are conducted. For verification mandates, field work and registry searches are initiated simultaneously.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">6</div>
+        <div><div class="proc-h">Report Delivery</div><p class="proc-p">Receive your written advisory report, risk assessment, due diligence findings, feasibility analysis, or project plan, fully documented.</p></div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">7</div>
+        <div><div class="proc-h">Recommendation & Next Steps</div><p class="proc-p">We walk through the findings together and agree on your next steps, whether acquisition, development commencement, or further advisory.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec--g" id="reviews">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow">Client Reviews</p>
+      <h2 class="s-title">What Our Clients Say</h2>
+      <p class="s-sub">Across land verification, feasibility advisory, and project planning, our clients share their experience.</p>
+    </div>
+    <div class="rev-grid fi">
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">I was about to buy a plot in Ajah and instinct told me to get it verified first. RareAcre's standard due diligence uncovered a litigation dispute on the property that the seller never disclosed. That report saved me over ₦15 million. Worth every kobo.</p>
+        <div class="rev-author">
+          <div class="rev-name">Chukwuemeka O.</div>
+          <div class="rev-role">Lagos-Based Investor</div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">I had been sitting on a plot of land in Sangotedo for three years not knowing what to develop. RareAcre's feasibility assessment was eye-opening, they gave me a clear financial outlook and a specific development recommendation. I finally have a plan.</p>
+        <div class="rev-author">
+          <div class="rev-name">Adaeze M.</div>
+          <div class="rev-role">Landowner, Sangotedo</div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">Living in the UK and trying to buy land in Lagos is incredibly stressful. RareAcre handled everything remotely, the verification, the report, all of it. The premium due diligence package gave me the confidence to proceed with a complex acquisition I would never have touched otherwise.</p>
+        <div class="rev-author">
+          <div class="rev-name">Femi A.</div>
+          <div class="rev-role">Diaspora Investor, United Kingdom</div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">The project planning and structuring engagement completely changed how I approached my development. RareAcre developed a full budget framework, roadmap, and construction strategy. Before this, I had no structure. Now I have a document I can present to contractors and financiers with confidence.</p>
+        <div class="rev-author">
+          <div class="rev-name">Tobi F.</div>
+          <div class="rev-role">Small Developer, Lagos</div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">We used RareAcre's basic verification package before buying a family home in Lekki. The title search came back clean, the summary report was detailed and professional, and the whole process took less than two weeks. We now recommend them to everyone in our circle.</p>
+        <div class="rev-author">
+          <div class="rev-name">The Okonkwo Family</div>
+          <div class="rev-role">Residential Buyers, Lekki</div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">As a lawyer, I've seen too many clients lose money to bad land deals. RareAcre is the only firm I now refer clients to before any acquisition. Their due diligence reports are thorough, well-structured, and hold up to professional scrutiny. The standard in this space.</p>
+        <div class="rev-author">
+          <div class="rev-name">Barrister Ngozi I.</div>
+          <div class="rev-role">Property Lawyer, Victoria Island</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ENGAGE -->
+<section class="sec" id="engage">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow">Engagement</p>
+      <h2 class="s-title">Four Ways to Start</h2>
+      <p class="s-sub">Choose the pathway that works for you. All routes begin with the same outcome: a structured, professional consultation.</p>
+    </div>
+    <div class="eng-grid fi">
+      <div class="eng-step">
+        <div class="eng-icon">📋</div>
+        <h4 class="eng-h">Book a Consultation</h4>
+        <p class="eng-p">Select a package, complete the enquiry form, and book your advisory session directly.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-icon">💬</div>
+        <h4 class="eng-h">WhatsApp Enquiry</h4>
+        <p class="eng-p">Message us on WhatsApp. An advisor responds within 24 hours to scope your engagement.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-icon">📌</div>
+        <h4 class="eng-h">Submit a Brief</h4>
+        <p class="eng-p">Have a specific project or land deal? Submit your brief and receive a tailored advisory proposal.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-icon">📞</div>
+        <h4 class="eng-h">Discovery Call</h4>
+        <p class="eng-p">Book a 30-minute discovery call to discuss your goals and identify the right consultation package.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-deco"></div><div class="cta-deco2"></div>
+  <p style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;position:relative;z-index:1">Ready to Begin</p>
+  <h2>Don't Invest in Land or Property<br>Without <em>Expert Verification First.</em></h2>
+  <p>Join over 63 clients who trusted RareAcre with their real estate decisions. Your consultation starts here.</p>
+  <div class="cta-btns">
+    <a href="#contact" class="cta-g">Book a Consultation Now</a>
+    <a href="https://wa.me/message/EWVEZOAWTHXZK1" target="_blank" class="cta-gh">WhatsApp Us Directly</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="s-head fi">
+      <p class="eyebrow">Contact</p>
+      <h2 class="s-title">Reach Our Advisory Team</h2>
+      <p class="s-sub">Our advisors respond within 24 hours to all consultation enquiries.</p>
+    </div>
+    <div class="con-grid fi">
+      <div class="con-info">
+        <h3>RareAcre Investment Limited</h3>
+        <p>3a Benedict Nwachukwu Ave,<br>Lekki, Ogombo Rd,<br>Lagos 106104, Nigeria.</p>
+        <div class="con-links">
+          <a href="https://www.rareacreinvestment.com" target="_blank" class="con-link">
+            <div class="con-ico">🌐</div>
+            <div class="con-lt"><strong>Website</strong><span>www.rareacreinvestment.com</span></div>
+          </a>
+          <a href="mailto:info@rareacreinvestment.com" class="con-link">
+            <div class="con-ico">✉️</div>
+            <div class="con-lt"><strong>Email</strong><span>info@rareacreinvestment.com</span></div>
+          </a>
+          <a href="https://wa.me/message/EWVEZOAWTHXZK1" target="_blank" class="con-link">
+            <div class="con-ico">💬</div>
+            <div class="con-lt"><strong>WhatsApp</strong><span>Send a direct message for fast response</span></div>
+          </a>
+          <a href="https://instagram.com/rareacreltd" target="_blank" class="con-link">
+            <div class="con-ico">📸</div>
+            <div class="con-lt"><strong>Instagram</strong><span>@rareacreltd</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="form-box">
+        <h4>Submit a Consultation Enquiry</h4>
+        <p>Complete the form and an advisor will contact you within 24 hours.</p>
+        <div class="fg"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
+        <div class="fg"><label>Phone / WhatsApp Number</label><input type="tel" placeholder="+234 or international number"></div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="fg">
+          <label>Consultation Package of Interest</label>
+          <select>
+            <option value="">Select a package...</option>
+            <option>Basic Verification, ₦350,000</option>
+            <option>Standard Due Diligence, ₦525,000</option>
+            <option>Premium Due Diligence, ₦800,000</option>
+            <option>Development Feasibility Assessment, ₦1,200,000</option>
+            <option>Project Planning & Structuring, ₦2,400,000</option>
+            <option>Not sure, I need guidance</option>
+          </select>
+        </div>
+        <div class="fg"><label>Describe Your Property or Project</label><textarea placeholder="Tell us about your land, project, or property challenge..."></textarea></div>
+        <button class="f-submit" onclick="handleSub(this)">Submit Enquiry →</button>
+        <p class="f-note">All enquiries are treated with strict confidentiality.</p>
+      </div>
+    </div>
+
+    <!-- Digital Recs -->
+    <div class="fi" style="margin-top:56px">
+      <div style="background:var(--navy);padding:32px 28px;border-radius:2px">
+        <p class="eyebrow" style="color:var(--gold);margin-bottom:16px">Digital Implementation Recommendations</p>
+        <p style="font-size:12.5px;color:rgba(255,255,255,.55);margin-bottom:20px">Recommended integrations for the live interactive version of this brochure.</p>
+        <div class="drec-grid">
+          <div class="drec"><h5>WhatsApp Integration</h5><p>Floating wa.me button on all pages. Pre-filled message per package for instant one-click enquiry.</p></div>
+          <div class="drec"><h5>Calendly Booking</h5><p>Embed Calendly on all "Book a Consultation" CTAs for direct calendar scheduling without back-and-forth.</p></div>
+          <div class="drec"><h5>CRM Lead Capture</h5><p>Form connected to HubSpot, Zoho, or equivalent with auto-acknowledgement email on every submission.</p></div>
+          <div class="drec"><h5>QR Codes</h5><p>Per-package QR codes linking directly to booking form, for print brochures, event stands, and pitch materials.</p></div>
+          <div class="drec"><h5>Interactive PDF Export</h5><p>This layout exports cleanly to interactive PDF with clickable CTAs, package buttons, and WhatsApp link.</p></div>
+          <div class="drec"><h5>Design Tool Ready</h5><p>Fully replicable in Canva, Figma, or InDesign. Brand colours: Navy #1B3A5C · Gold #C8A96E.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="f-logo">RARE<span>A</span>CRE</div>
+    <div class="f-copy">© 2025 RareAcre Investment Limited. Lekki, Lagos, Nigeria. All rights reserved.</div>
+    <div class="f-links">
+      <a href="https://www.rareacreinvestment.com" target="_blank">Website</a>
+      <a href="https://instagram.com/rareacreltd" target="_blank">Instagram</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/message/EWVEZOAWTHXZK1" target="_blank" class="wa" title="Chat on WhatsApp">💬</a>
+
+<script>
+// Fade-in observer
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)} }), {threshold:0.08});
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const t = document.querySelector(a.getAttribute('href'));
+  if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+}));
+
+// Form submit
+function handleSub(btn) {
+  btn.textContent = 'Enquiry Submitted ✓';
+  btn.style.background = 'var(--navy)';
+  btn.style.color = 'var(--gold)';
+  setTimeout(() => { btn.textContent = 'Submit Enquiry →'; btn.style.background = ''; btn.style.color = ''; }, 3500);
+}
+</script>
+</body>
+</html>
