@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { heroSlides, CONSULTATION_FORM_URL } from '../../data/content'
+import { heroSlides } from '../../data/content'
+import { BookConsultationButton } from '../shared/BookConsultationButton'
 
 export function HeroSlider() {
   const [index, setIndex] = useState(0)
@@ -12,7 +13,6 @@ export function HeroSlider() {
     return () => window.clearInterval(timer)
   }, [])
 
-  const go = (next: number) => setIndex((next + heroSlides.length) % heroSlides.length)
   const active = heroSlides[index]
 
   return (
@@ -57,35 +57,13 @@ export function HeroSlider() {
               >
                 View Consultation Packages
               </a>
-              <a
-                href={CONSULTATION_FORM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border-2 border-white px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black"
-              >
+              <BookConsultationButton className="rounded-full border-2 border-white px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black">
                 Book a Strategy Session
-              </a>
+              </BookConsultationButton>
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
-
-      <button
-        type="button"
-        aria-label="Previous slide"
-        onClick={() => go(index - 1)}
-        className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-xl text-white transition hover:border-white hover:bg-white/10 md:left-8"
-      >
-        ‹
-      </button>
-      <button
-        type="button"
-        aria-label="Next slide"
-        onClick={() => go(index + 1)}
-        className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-xl text-white transition hover:border-white hover:bg-white/10 md:right-8"
-      >
-        ›
-      </button>
 
       <div className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 gap-3">
         {heroSlides.map((slide, slideIndex) => (

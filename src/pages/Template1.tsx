@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import {
-  CONSULTATION_FORM_URL,
   EMAIL,
   engagementOptions,
   INSTAGRAM,
@@ -11,6 +10,7 @@ import {
   whyFacts,
   WHATSAPP_URL,
 } from '../data/content'
+import { BookConsultationButton } from '../components/shared/BookConsultationButton'
 import { FadeIn } from '../components/shared/FadeIn'
 import { SectionReveal } from '../components/shared/SectionReveal'
 import { StaggerGroup, StaggerItem } from '../components/shared/Stagger'
@@ -18,6 +18,7 @@ import { MobileNav } from '../components/shared/MobileNav'
 import { Packages } from '../components/shared/Packages'
 import { WhatsAppFloat } from '../components/shared/WhatsAppFloat'
 import { ThemeToggle } from '../components/shared/ThemeToggle'
+import { useConsultationForm } from '../context/ConsultationFormContext'
 import { useTheme } from '../context/ThemeContext'
 import { ProcessStepsCarousel } from '../components/template-1/ProcessStepsCarousel'
 import { ClientSegmentsCarousel } from '../components/template-1/ClientSegmentsCarousel'
@@ -36,6 +37,7 @@ const navLinks = [
 export default function Template1() {
   const [scrolled, setScrolled] = useState(false)
   const { isDark } = useTheme()
+  const { openForm } = useConsultationForm()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -72,22 +74,17 @@ export default function Template1() {
           </ul>
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
-            <a
-              href={CONSULTATION_FORM_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border-2 border-white px-7 py-2.5 font-poppins text-xs font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black"
-            >
+            <BookConsultationButton className="rounded-full border-2 border-white px-7 py-2.5 font-poppins text-xs font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black">
               Book a Consultation
-            </a>
+            </BookConsultationButton>
           </div>
           <div className="flex items-center gap-3 lg:hidden">
             <ThemeToggle />
             <MobileNav
               links={navLinks}
-              ctaHref={CONSULTATION_FORM_URL}
-              ctaExternal
+              ctaHref="#"
               ctaLabel="Book a Consultation"
+              onCtaClick={() => openForm()}
               ctaClassName="rounded-full border-2 border-white px-7 py-2.5 font-poppins text-xs font-bold uppercase tracking-wide text-white"
               linkClassName="block font-poppins text-sm font-medium text-white/85"
               menuButtonClassName="text-2xl text-white"
@@ -278,22 +275,40 @@ export default function Template1() {
           <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {engagementOptions.map((option) => (
               <StaggerItem key={option.title}>
-                <a
-                  href={option.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block h-full"
-                >
-                  <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-red text-2xl text-red">
-                    {option.icon}
-                  </div>
-                  <h3 className="mt-5 font-poppins text-base font-semibold t1-heading">
-                    {option.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed t1-body">{option.description}</p>
-                </article>
-                </a>
+                {'opensConsultationForm' in option && option.opensConsultationForm ? (
+                  <button
+                    type="button"
+                    onClick={() => openForm()}
+                    className="block h-full w-full text-left"
+                  >
+                    <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-red text-2xl text-red">
+                        {option.icon}
+                      </div>
+                      <h3 className="mt-5 font-poppins text-base font-semibold t1-heading">
+                        {option.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed t1-body">{option.description}</p>
+                    </article>
+                  </button>
+                ) : (
+                  <a
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block h-full"
+                  >
+                    <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-red text-2xl text-red">
+                        {option.icon}
+                      </div>
+                      <h3 className="mt-5 font-poppins text-base font-semibold t1-heading">
+                        {option.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed t1-body">{option.description}</p>
+                    </article>
+                  </a>
+                )}
               </StaggerItem>
             ))}
           </StaggerGroup>
@@ -314,14 +329,9 @@ export default function Template1() {
               consultation starts here.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href={CONSULTATION_FORM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full bg-black px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition-all duration-300 hover:scale-105 hover:bg-ink-dark"
-              >
+              <BookConsultationButton className="rounded-full bg-black px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition-all duration-300 hover:scale-105 hover:bg-ink-dark">
                 Book a Consultation Now
-              </a>
+              </BookConsultationButton>
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
@@ -403,16 +413,11 @@ export default function Template1() {
                   Complete our consultation form to share your property details, select a service
                   area, and submit your enquiry. An advisor will follow up within 24 hours.
                 </p>
-                <a
-                  href={CONSULTATION_FORM_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-6 block rounded-full bg-black py-4 text-center font-poppins text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:bg-red"
-                >
+                <BookConsultationButton className="mt-6 block w-full rounded-full bg-black py-4 text-center font-poppins text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:bg-red">
                   Open Consultation Form →
-                </a>
+                </BookConsultationButton>
                 <p className="mt-3 text-center text-[11px] t1-body opacity-60">
-                  You will be redirected to our secure Google Form.
+                  Complete the form here and our team will respond within 24 hours.
                 </p>
               </div>
             </FadeIn>

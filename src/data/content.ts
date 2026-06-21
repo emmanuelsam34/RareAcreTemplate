@@ -2,8 +2,6 @@ export const WHATSAPP_URL = 'https://wa.me/message/EWVEZOAWTHXZK1'
 export const WEBSITE_URL = 'https://www.rareacreinvestment.com'
 export const EMAIL = 'info@rareacreinvestment.com'
 export const INSTAGRAM = 'https://instagram.com/rareacreltd'
-export const CONSULTATION_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLScc9GOFWJ-DMBbvzxAG3P1L1B_u78kQR_RTNNs1dCTaBy8_Og/viewform'
 
 export const stats = [
   { value: '₦2b+', label: 'Transactions Overseen' },
@@ -293,7 +291,7 @@ export const engagementOptions = [
     title: 'Book a Consultation',
     description:
       'Select a package, complete the enquiry form, and book your advisory session directly.',
-    href: CONSULTATION_FORM_URL,
+    opensConsultationForm: true,
   },
   {
     icon: '💬',
@@ -306,14 +304,14 @@ export const engagementOptions = [
     title: 'Submit a Brief',
     description:
       'Have a specific project or land deal? Submit your brief and receive a tailored advisory proposal.',
-    href: CONSULTATION_FORM_URL,
+    opensConsultationForm: true,
   },
   {
     icon: '📞',
     title: 'Discovery Call',
     description:
       'Book a 30-minute discovery call to discuss your goals and identify the right consultation package.',
-    href: CONSULTATION_FORM_URL,
+    opensConsultationForm: true,
   },
 ]
 

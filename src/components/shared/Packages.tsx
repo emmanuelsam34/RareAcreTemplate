@@ -1,5 +1,14 @@
-import { advisoryPackages, verificationPackages, CONSULTATION_FORM_URL } from '../../data/content'
+import {
+  advisoryPackages,
+  verificationPackages,
+} from '../../data/content'
+import {
+  feasibilityPackagePreset,
+  planningPackagePreset,
+  verificationPackagePreset,
+} from '../../data/consultationForm'
 import { useTheme } from '../../context/ThemeContext'
+import { BookConsultationButton } from './BookConsultationButton'
 import { FadeIn } from './FadeIn'
 import { StaggerGroup, StaggerItem } from './Stagger'
 
@@ -14,6 +23,10 @@ function LightPackages({ isDark }: { isDark: boolean }) {
   const muted = isDark ? 'text-white/45' : 'text-ink/50'
   const card = isDark ? 'bg-[#222] border-white/10' : 'bg-white border-black/10'
   const cardFeatured = isDark ? 'border-red shadow-lg' : 'border-red shadow-lg'
+  const bookButtonClass = (featured: boolean) =>
+    `mt-8 block w-full rounded-full py-3.5 text-center font-poppins text-[11px] font-bold uppercase tracking-[0.14em] text-white transition ${
+      featured ? 'bg-red hover:bg-pink' : 'bg-black hover:bg-red'
+    }`
 
   return (
     <div className="space-y-16">
@@ -71,16 +84,12 @@ function LightPackages({ isDark }: { isDark: boolean }) {
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href={CONSULTATION_FORM_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`mt-8 block rounded-full py-3.5 text-center font-poppins text-[11px] font-bold uppercase tracking-[0.14em] text-white transition ${
-                      pkg.featured ? 'bg-red hover:bg-pink' : 'bg-black hover:bg-red'
-                    }`}
+                  <BookConsultationButton
+                    preset={verificationPackagePreset(pkg.name)}
+                    className={bookButtonClass(pkg.featured)}
                   >
                     Book This Package
-                  </a>
+                  </BookConsultationButton>
                 </div>
               </article>
             </StaggerItem>
@@ -138,14 +147,16 @@ function LightPackages({ isDark }: { isDark: boolean }) {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href={CONSULTATION_FORM_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                      className="mt-auto block rounded-full bg-black py-3.5 text-center font-poppins text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-red sm:mt-6"
+                    <BookConsultationButton
+                      preset={
+                        pkg.name === 'Development Feasibility Assessment'
+                          ? feasibilityPackagePreset()
+                          : planningPackagePreset()
+                      }
+                      className="mt-auto block w-full rounded-full bg-black py-3.5 text-center font-poppins text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-red sm:mt-6"
                     >
                       Book Advisory
-                    </a>
+                    </BookConsultationButton>
                   </div>
                 </div>
               </article>
