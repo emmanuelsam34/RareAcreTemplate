@@ -5,11 +5,8 @@
     <script>
       (function () {
         try {
-          var path = location.pathname
-          var key = path.indexOf('template-2') !== -1 ? 'rareacre-theme-2' : 'rareacre-theme-1'
-          var stored = localStorage.getItem(key)
-          var isDark = stored ? stored === 'dark' : path.indexOf('template-2') !== -1
-          if (isDark) {
+          var stored = localStorage.getItem('rareacre-theme')
+          if (stored === 'dark') {
             document.documentElement.classList.add('dark')
             document.documentElement.style.colorScheme = 'dark'
           }
@@ -18,7 +15,7 @@
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RareAcre Consultancy Templates</title>
+    <title>RareAcre Consultancy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

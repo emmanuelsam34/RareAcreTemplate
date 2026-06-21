@@ -2,6 +2,8 @@ export const WHATSAPP_URL = 'https://wa.me/message/EWVEZOAWTHXZK1'
 export const WEBSITE_URL = 'https://www.rareacreinvestment.com'
 export const EMAIL = 'info@rareacreinvestment.com'
 export const INSTAGRAM = 'https://instagram.com/rareacreltd'
+export const CONSULTATION_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScc9GOFWJ-DMBbvzxAG3P1L1B_u78kQR_RTNNs1dCTaBy8_Og/viewform'
 
 export const stats = [
   { value: '₦2b+', label: 'Transactions Overseen' },
@@ -109,33 +111,42 @@ export const advisoryPackages = [
     tag: 'Advisory Package 04',
     name: 'Development Feasibility Assessment',
     description:
-      'For landowners and investors seeking clarity on what to build and whether a proposed project is financially viable.',
+      'Before you commit to a build, we analyse your site, local market demand, and financial assumptions to confirm whether your proposed development is viable — and recommend the highest-value use of your land if it is not.',
     fee: '₦1,200,000',
-    includes: ['Market Review', 'Financial Outlook', 'Highest & Best Use Assessment'],
+    includes: [
+      'Site & Location Context Review',
+      'Local Market Demand & Absorption Analysis',
+      'Comparable Sales & Rental Benchmarking',
+      'Highest & Best Use Assessment',
+      'Preliminary Financial Outlook & ROI Modelling',
+      'Development Risk & Constraint Identification',
+    ],
     deliverables: [
-      'Feasibility Assessment Report',
-      'Development Recommendation',
-      'Investment Outlook',
+      'Written Feasibility Assessment Report',
+      'Highest & Best Use Recommendation',
+      'Financial Outlook Summary',
+      'Go / No-Go Development Advisory',
     ],
   },
   {
     tag: 'Advisory Package 05',
     name: 'Project Planning & Structuring',
     description:
-      'For clients who want to build but require expert guidance, planning, and execution strategy before commencing development.',
-    fee: '₦2,400,000',
+      'Once you know what to build, we translate that decision into a structured execution plan — with a phased budget, delivery timeline, and construction strategy you can present to contractors, financiers, and project partners.',
+    fee: '₦4,200,000',
     includes: [
-      'Preliminary Budget Development',
-      'Development Roadmap',
-      'Construction Strategy',
-      'Project Delivery Timeline',
-      'Development Advisory Sessions',
+      'Preliminary Development Budget & Cost Benchmarking',
+      'Phased Development Roadmap',
+      'Construction Method & Procurement Strategy',
+      'Project Delivery Timeline & Milestones',
+      'Contractor Brief & Scope Framework',
+      'Structured Development Advisory Sessions',
     ],
     deliverables: [
-      'Project Planning Report',
-      'Development Roadmap',
-      'Budget Framework',
-      'Construction Strategy Document',
+      'Project Planning & Structuring Report',
+      'Phased Development Roadmap Document',
+      'Preliminary Budget Framework',
+      'Construction Strategy & Delivery Plan',
     ],
   },
 ]
@@ -145,36 +156,37 @@ export const clientSegments = [
     icon: '🏠',
     title: 'Landowners',
     description:
-      'Feasibility assessments and highest & best use analysis before committing to any development.',
+      'Feasibility assessments and highest & best use analysis to clarify what to build before you commit to any development.',
   },
   {
     icon: '📊',
     title: 'Real Estate Investors',
-    description: 'Due diligence, acquisition advisory, and risk assessment before committing capital.',
+    description:
+      'Due diligence, acquisition advisory, and risk assessment to protect your capital before every investment decision.',
   },
   {
     icon: '✈️',
     title: 'Diaspora Investors',
     description:
-      'Trusted advisory, verified acquisition, and remote-ready consultation structured for Nigerians abroad.',
+      'Trusted verification and remote-ready advisory structured for Nigerians abroad buying or building in Nigeria.',
   },
   {
     icon: '🏗️',
     title: 'First-Time Developers',
     description:
-      'Project planning and structuring that removes the guesswork from your first development.',
+      'Project planning and structuring that removes guesswork and gives you a clear roadmap for your first build.',
   },
   {
     icon: '💼',
     title: 'Professionals & Executives',
     description:
-      'Structured advisory for high-income earners making their first or next property investment.',
+      'Structured advisory for high-income earners making their first or next property investment with confidence.',
   },
   {
     icon: '👨‍👩‍👧',
     title: 'Families Building Homes',
     description:
-      'Land verification and project planning to protect your family\'s most important investment.',
+      'Land verification and project planning to protect your family\'s most important investment from costly mistakes.',
   },
 ]
 
@@ -259,33 +271,19 @@ export const processSteps = [
 export const reviews = [
   {
     text: 'I was about to buy a plot in Ajah and instinct told me to get it verified first. RareAcre\'s standard due diligence uncovered a litigation dispute that saved me over ₦15 million.',
-    name: 'Chukwuemeka O.',
     role: 'Lagos-Based Investor',
   },
   {
     text: 'I had been sitting on a plot in Sangotedo for three years not knowing what to develop. RareAcre\'s feasibility assessment gave me a clear financial outlook and a specific development recommendation.',
-    name: 'Adaeze M.',
     role: 'Landowner, Sangotedo',
   },
   {
     text: 'Living in the UK and trying to buy land in Lagos is incredibly stressful. RareAcre handled everything remotely and gave me the confidence to proceed with a complex acquisition.',
-    name: 'Femi A.',
     role: 'Diaspora Investor, United Kingdom',
   },
   {
     text: 'The project planning engagement completely changed how I approached my development. I now have a document I can present to contractors and financiers with confidence.',
-    name: 'Tobi F.',
     role: 'Small Developer, Lagos',
-  },
-  {
-    text: 'We used RareAcre\'s basic verification package before buying a family home in Lekki. The title search came back clean and the whole process took less than two weeks.',
-    name: 'The Okonkwo Family',
-    role: 'Residential Buyers, Lekki',
-  },
-  {
-    text: 'As a lawyer, I\'ve seen too many clients lose money to bad land deals. RareAcre is the only firm I now refer clients to before any acquisition.',
-    name: 'Barrister Ngozi I.',
-    role: 'Property Lawyer, Victoria Island',
   },
 ]
 
@@ -295,23 +293,27 @@ export const engagementOptions = [
     title: 'Book a Consultation',
     description:
       'Select a package, complete the enquiry form, and book your advisory session directly.',
+    href: CONSULTATION_FORM_URL,
   },
   {
     icon: '💬',
     title: 'WhatsApp Enquiry',
     description: 'Message us on WhatsApp. An advisor responds within 24 hours to scope your engagement.',
+    href: WHATSAPP_URL,
   },
   {
     icon: '📌',
     title: 'Submit a Brief',
     description:
       'Have a specific project or land deal? Submit your brief and receive a tailored advisory proposal.',
+    href: CONSULTATION_FORM_URL,
   },
   {
     icon: '📞',
     title: 'Discovery Call',
     description:
       'Book a 30-minute discovery call to discuss your goals and identify the right consultation package.',
+    href: CONSULTATION_FORM_URL,
   },
 ]
 
@@ -346,15 +348,6 @@ export const buildValues = [
     description:
       'We are committed to transforming and enriching lives through quality properties and services.',
   },
-]
-
-export const packageOptions = [
-  'Basic Verification, ₦350,000',
-  'Standard Due Diligence, ₦525,000',
-  'Premium Due Diligence, ₦800,000',
-  'Development Feasibility Assessment, ₦1,200,000',
-  'Project Planning & Structuring, ₦2,400,000',
-  'Not sure, I need guidance',
 ]
 
 export const heroSlides = [

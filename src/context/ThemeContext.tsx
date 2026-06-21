@@ -1,17 +1,14 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type Theme = 'light' | 'dark'
-export type TemplateId = '1' | '2'
 
-const storageKey = (templateId: TemplateId) => `rareacre-theme-${templateId}`
+const STORAGE_KEY = 'rareacre-theme'
 
-const defaultTheme = (templateId: TemplateId): Theme => (templateId === '2' ? 'dark' : 'light')
-
-function readTheme(templateId: TemplateId): Theme {
-  if (typeof window === 'undefined') return defaultTheme(templateId)
-  const stored = window.localStorage.getItem(storageKey(templateId))
+function readTheme(): Theme {
+  if (typeof window === 'undefined') return 'light'
+  const stored = window.localStorage.getItem(STORAGE_KEY)
   if (stored === 'light' || stored === 'dark') return stored
-  return defaultTheme(templateId)
+  return 'light'
 }
 
 function applyTheme(theme: Theme) {
@@ -29,23 +26,13 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-export function TemplateThemeProvider({
-  templateId,
-  children,
-}: {
-  templateId: TemplateId
-  children: ReactNode
-}) {
-  const [theme, setThemeState] = useState<Theme>(() => readTheme(templateId))
-
-  useEffect(() => {
-    setThemeState(readTheme(templateId))
-  }, [templateId])
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>(readTheme)
 
   useEffect(() => {
     applyTheme(theme)
-    window.localStorage.setItem(storageKey(templateId), theme)
-  }, [theme, templateId])
+    window.localStorage.setItem(STORAGE_KEY, theme)
+  }, [theme])
 
   const setTheme = useCallback((next: Theme) => setThemeState(next), [])
 
@@ -69,7 +56,7 @@ export function TemplateThemeProvider({
 export function useTheme() {
   const context = useContext(ThemeContext)
   if (!context) {
-    throw new Error('useTheme must be used within TemplateThemeProvider')
+    throw new Error('useTheme must be used within ThemeProvider')
   }
   return context
 }

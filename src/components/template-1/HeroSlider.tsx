@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { heroSlides } from '../../data/content'
+import { heroSlides, CONSULTATION_FORM_URL } from '../../data/content'
 
 export function HeroSlider() {
   const [index, setIndex] = useState(0)
@@ -58,7 +58,9 @@ export function HeroSlider() {
                 View Consultation Packages
               </a>
               <a
-                href="#contact"
+                href={CONSULTATION_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
                 className="rounded-full border-2 border-white px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black"
               >
                 Book a Strategy Session

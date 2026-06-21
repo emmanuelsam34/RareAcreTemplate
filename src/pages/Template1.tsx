@@ -1,20 +1,16 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
-  clientSegments,
+  CONSULTATION_FORM_URL,
   EMAIL,
   engagementOptions,
   INSTAGRAM,
   problems,
-  processSteps,
-  reviews,
   stats,
   WEBSITE_URL,
   whyFacts,
   WHATSAPP_URL,
 } from '../data/content'
-import { ContactForm } from '../components/shared/ContactForm'
 import { FadeIn } from '../components/shared/FadeIn'
 import { SectionReveal } from '../components/shared/SectionReveal'
 import { StaggerGroup, StaggerItem } from '../components/shared/Stagger'
@@ -23,7 +19,10 @@ import { Packages } from '../components/shared/Packages'
 import { WhatsAppFloat } from '../components/shared/WhatsAppFloat'
 import { ThemeToggle } from '../components/shared/ThemeToggle'
 import { useTheme } from '../context/ThemeContext'
+import { ProcessStepsCarousel } from '../components/template-1/ProcessStepsCarousel'
+import { ClientSegmentsCarousel } from '../components/template-1/ClientSegmentsCarousel'
 import { HeroSlider } from '../components/template-1/HeroSlider'
+import { ReviewsCarousel } from '../components/template-1/ReviewsCarousel'
 import { WhatWeDoSlider } from '../components/template-1/WhatWeDoSlider'
 
 const navLinks = [
@@ -72,19 +71,22 @@ export default function Template1() {
             ))}
           </ul>
           <div className="hidden items-center gap-3 lg:flex">
-            <ThemeToggle style="t1" />
+            <ThemeToggle />
             <a
-              href="#contact"
+              href={CONSULTATION_FORM_URL}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-full border-2 border-white px-7 py-2.5 font-poppins text-xs font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black"
             >
               Book a Consultation
             </a>
           </div>
           <div className="flex items-center gap-3 lg:hidden">
-            <ThemeToggle style="t1" />
+            <ThemeToggle />
             <MobileNav
               links={navLinks}
-              ctaHref="#contact"
+              ctaHref={CONSULTATION_FORM_URL}
+              ctaExternal
               ctaLabel="Book a Consultation"
               ctaClassName="rounded-full border-2 border-white px-7 py-2.5 font-poppins text-xs font-bold uppercase tracking-wide text-white"
               linkClassName="block font-poppins text-sm font-medium text-white/85"
@@ -147,7 +149,7 @@ export default function Template1() {
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <Packages template="1" />
+            <Packages />
           </FadeIn>
         </div>
       </SectionReveal>
@@ -167,21 +169,9 @@ export default function Template1() {
               expert guidance and documented outcomes.
             </p>
           </FadeIn>
-          <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {clientSegments.map((segment) => (
-              <StaggerItem key={segment.title}>
-                <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red text-2xl text-white">
-                    {segment.icon}
-                  </div>
-                  <h3 className="mt-5 font-poppins text-lg font-semibold t1-heading">
-                    {segment.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed t1-body">{segment.description}</p>
-                </article>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          <FadeIn delay={0.15}>
+            <ClientSegmentsCarousel />
+          </FadeIn>
         </div>
       </SectionReveal>
 
@@ -229,7 +219,7 @@ export default function Template1() {
       </SectionReveal>
 
       <SectionReveal id="process" className="t1-surface py-24">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="mb-14 text-center" delay={0.1}>
             <span className="mx-auto mb-5 block h-1 w-16 bg-red" />
             <p className="font-poppins text-sm font-semibold uppercase tracking-[0.2em] text-red">
@@ -243,21 +233,9 @@ export default function Template1() {
               protect your interests at every step.
             </p>
           </FadeIn>
-          <StaggerGroup className="space-y-0">
-            {processSteps.map((step) => (
-              <StaggerItem key={step.title}>
-                <div className="grid grid-cols-[56px_1fr] gap-6 border-b t1-border py-7 last:border-b-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red font-poppins text-lg font-bold text-white">
-                    {step.step}
-                  </div>
-                  <div>
-                    <h3 className="font-poppins text-xl font-semibold t1-heading">{step.title}</h3>
-                    <p className="mt-2 leading-relaxed t1-body">{step.description}</p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          <FadeIn delay={0.15}>
+            <ProcessStepsCarousel />
+          </FadeIn>
         </div>
       </SectionReveal>
 
@@ -276,22 +254,9 @@ export default function Template1() {
               their experience.
             </p>
           </FadeIn>
-          <StaggerGroup className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((review) => (
-              <StaggerItem key={review.name}>
-                <article className="h-full t1-card p-9 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
-                  <div className="tracking-widest text-red">★★★★★</div>
-                  <p className="mt-5 text-base italic leading-relaxed t1-body">
-                    &ldquo;{review.text}&rdquo;
-                  </p>
-                  <div className="mt-7 border-t t1-border pt-5">
-                    <p className="font-poppins font-semibold t1-heading">{review.name}</p>
-                    <p className="text-sm uppercase tracking-wide t1-body opacity-60">{review.role}</p>
-                  </div>
-                </article>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          <FadeIn delay={0.15}>
+            <ReviewsCarousel />
+          </FadeIn>
         </div>
       </SectionReveal>
 
@@ -313,7 +278,13 @@ export default function Template1() {
           <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {engagementOptions.map((option) => (
               <StaggerItem key={option.title}>
-                <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+                <a
+                  href={option.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block h-full"
+                >
+                  <article className="h-full t1-card-muted p-7 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-red text-2xl text-red">
                     {option.icon}
                   </div>
@@ -322,6 +293,7 @@ export default function Template1() {
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed t1-body">{option.description}</p>
                 </article>
+                </a>
               </StaggerItem>
             ))}
           </StaggerGroup>
@@ -343,7 +315,9 @@ export default function Template1() {
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a
-                href="#contact"
+                href={CONSULTATION_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
                 className="rounded-full bg-black px-9 py-4 font-poppins text-sm font-bold uppercase tracking-wide text-white transition-all duration-300 hover:scale-105 hover:bg-ink-dark"
               >
                 Book a Consultation Now
@@ -417,7 +391,30 @@ export default function Template1() {
               </StaggerGroup>
             </FadeIn>
             <FadeIn direction="right" delay={0.15}>
-              <ContactForm accent="red" variant={isDark ? 'dark' : 'light'} />
+              <div
+                className={`rounded-2xl p-8 shadow-lg ${
+                  isDark
+                    ? 'border border-white/10 bg-[#222]'
+                    : 'bg-white'
+                }`}
+              >
+                <h4 className="font-poppins text-sm font-bold t1-heading">Book a Consultation</h4>
+                <p className="mt-2 text-sm leading-relaxed t1-body">
+                  Complete our consultation form to share your property details, select a service
+                  area, and submit your enquiry. An advisor will follow up within 24 hours.
+                </p>
+                <a
+                  href={CONSULTATION_FORM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 block rounded-full bg-black py-4 text-center font-poppins text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:bg-red"
+                >
+                  Open Consultation Form →
+                </a>
+                <p className="mt-3 text-center text-[11px] t1-body opacity-60">
+                  You will be redirected to our secure Google Form.
+                </p>
+              </div>
             </FadeIn>
           </div>
         </div>
@@ -454,11 +451,19 @@ export default function Template1() {
                 Explore
               </h4>
               <ul className="mt-4 space-y-2 text-sm">
-                <li><Link to="/" className="transition-colors duration-300 hover:text-red">Templates</Link></li>
-                <li><Link to="/template-2" className="transition-colors duration-300 hover:text-red">Elite Template</Link></li>
                 <li>
                   <a href={WEBSITE_URL} target="_blank" rel="noreferrer" className="transition-colors duration-300 hover:text-red">
                     Website
+                  </a>
+                </li>
+                <li>
+                  <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="transition-colors duration-300 hover:text-red">
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="transition-colors duration-300 hover:text-red">
+                    WhatsApp
                   </a>
                 </li>
               </ul>

@@ -1,26 +1,11 @@
 import { useTheme } from '../../context/ThemeContext'
 
 type ThemeToggleProps = {
-  style?: 't1' | 't2'
   className?: string
 }
 
-export function ThemeToggle({ style = 't1', className = '' }: ThemeToggleProps) {
+export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const { isDark, toggleTheme } = useTheme()
-
-  const base =
-    style === 't1'
-      ? 'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300'
-      : 'flex h-10 w-10 items-center justify-center rounded-[2px] border transition-all duration-300'
-
-  const themed =
-    style === 't1'
-      ? isDark
-        ? 'border-white/20 bg-white/10 text-white hover:border-red hover:bg-red/20'
-        : 'border-white/30 bg-white/10 text-white hover:border-white hover:bg-white/20'
-      : isDark
-        ? 'border-white/15 bg-white/5 text-gold-luxury hover:border-gold-luxury hover:bg-gold-luxury/10'
-        : 'border-navy-elite/15 bg-navy-elite/5 text-navy-elite hover:border-gold-luxury hover:bg-gold-luxury/10'
 
   return (
     <button
@@ -28,7 +13,7 @@ export function ThemeToggle({ style = 't1', className = '' }: ThemeToggleProps) 
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      className={`${base} ${themed} ${className}`}
+      className={`flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-all duration-300 hover:border-white hover:bg-white/20 ${className}`}
     >
       {isDark ? (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -13,6 +13,7 @@ type MobileNavProps = {
   linkClassName: string
   menuButtonClassName: string
   panelClassName?: string
+  ctaExternal?: boolean
 }
 
 export function MobileNav({
@@ -23,6 +24,7 @@ export function MobileNav({
   linkClassName,
   menuButtonClassName,
   panelClassName = 'bg-inherit',
+  ctaExternal = false,
 }: MobileNavProps) {
   const [open, setOpen] = useState(false)
 
@@ -53,7 +55,13 @@ export function MobileNav({
               </li>
             ))}
           </ul>
-          <a href={ctaHref} onClick={() => setOpen(false)} className={`mt-4 inline-block ${ctaClassName}`}>
+          <a
+            href={ctaHref}
+            target={ctaExternal ? '_blank' : undefined}
+            rel={ctaExternal ? 'noreferrer' : undefined}
+            onClick={() => setOpen(false)}
+            className={`mt-4 inline-block ${ctaClassName}`}
+          >
             {ctaLabel}
           </a>
         </div>
